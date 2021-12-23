@@ -5,8 +5,17 @@ const Container = styled('div')`
     flex: 1;
 `;
 
-const ViewOne = () => {
-	return <Container>Hello from ViewOne</Container>;
+const ViewOne = ({ results }) => {
+	if (!results) {
+		return <Container>loading</Container>;
+	}
+	return (
+		<Container>
+			{results.map((item) => {
+				return <div key={item.name}>{item.name}</div>;
+			})}
+		</Container>
+	);
 };
 
 export default ViewOne;
