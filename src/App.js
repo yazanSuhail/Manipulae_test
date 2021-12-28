@@ -13,7 +13,7 @@ const Container = styled('div')`
 
 const App = () => {
 	const [ results, setResults ] = useState(null);
-	const [ selectedPokemon, setSelectedPokemon ] = useState(null);
+	const [ selectedPokemon, setSelectedPokemon ] = useState(0);
 
 	useEffect(() => {
 		axios
@@ -28,16 +28,17 @@ const App = () => {
 			});
 	}, []);
 
-	useEffect(() => {
-		if (!results) return
-
-		setSelectedPokemon(results.results[0].url)
-	}, [results])
-
 	return (
 		<Container>
-			<ViewOne results={results?.results} />
-			<ViewTwo selectedPokemon={selectedPokemon}/>
+			<ViewOne 
+			results={results?.results}
+			selectedPokemon={selectedPokemon}
+			setSelectedPokemon={setSelectedPokemon}
+			 />
+			<ViewTwo 
+			selectedPokemon={selectedPokemon}
+			allPokemon={results?.results}
+			/>
 		</Container>
 	);
 };

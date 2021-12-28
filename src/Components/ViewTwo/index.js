@@ -7,18 +7,18 @@ const Container = styled('div')`
     flex: 1;
 `;
 
-const ViewTwo = ({ selectedPokemon }) => {
+const ViewTwo = ({ selectedPokemon, allPokemon }) => {
 	const [ results, setResults ] = useState(null);
 
 	useEffect(
 		() => {
-			if (!selectedPokemon) return;
-
-			axios.get(selectedPokemon).then((response) => {
+			if (!allPokemon) return;
+			
+			axios.get(allPokemon[selectedPokemon].url).then((response) => {
 				setResults(response.data);
 			});
 		},
-		[ selectedPokemon ]
+		[ selectedPokemon, allPokemon ]
 	);
 
 	if (!results) {

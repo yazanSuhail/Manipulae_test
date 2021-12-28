@@ -5,14 +5,20 @@ const Container = styled('div')`
     flex: 1;
 `;
 
-const ViewOne = ({ results }) => {
+const Pokemon = styled('div')`
+	background: ${(props) => (props.active ? 'red' : 'white')};
+`;
+
+const ViewOne = ({ results, selectedPokemon, setSelectedPokemon }) => {
+	const handleClick = (index) => { setSelectedPokemon(index)}
+
 	if (!results) {
 		return <Container>loading</Container>;
 	}
 	return (
 		<Container>
-			{results.map((item) => {
-				return <div key={item.name}>{item.name}</div>;
+			{results.map((item, i) => {
+				return <Pokemon onClick={() => handleClick(i)} key={item.name} active={i === selectedPokemon}>{item.name}</Pokemon>;
 			})}
 		</Container>
 	);
